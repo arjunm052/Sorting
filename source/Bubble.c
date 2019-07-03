@@ -1,43 +1,37 @@
 #include <stdio.h>
 #include<time.h>
 
-void swap(long int*,long int*);
-
-
-void selectionsort(long int arr[],long int n)
+void bubblesort(long int arr[],long int n)
 {
-	long int i,j,min;
-	for(i=0;i<n;i++)
+	long int i,j,temp,flag=0;
+	for(i=0;i<n-1;i++)
 	{
-		min=i;
-		for(j=i+1;j<n;j++)
+		for(j=0;j<n-i-1;j++)
 		{
-			if(arr[j]<arr[min])
-			min=j;
+			if(arr[j]>arr[j+1])
+			{
+				flag=1;
+				temp=arr[j+1];
+				arr[j+1]=arr[j];
+				arr[j]=temp;
+			}
 		}
-		swap(&arr[min],&arr[i]);
+		if(flag==0)
+		return;
 	}
-}
-
-void swap(long int *x,long int *y)
-{
-	long 
-	int temp = *x;
-	*x = *y;
-	*y = temp;
 }
 
 int main () 
 {
 	
-clock_t t; 
+ clock_t t; 
 
   
  FILE *fp;
  FILE *fp2;
  
  fp = fopen("data.txt","r");
- fp2 = fopen("selection-sort.txt","w");
+ fp2 = fopen("bubble-sort.txt","w");
  
  long int count = 0;
  char c;
@@ -49,9 +43,7 @@ clock_t t;
         if (c == '\n') // Increment count if this character is newline 
             count = count + 1;
 
-fclose(fp);
-
-fp = fopen("data.txt","r");		
+rewind(fp);		
 
 printf("Linecount: %d\n",count);
  long int size = count;
@@ -63,9 +55,9 @@ printf("Linecount: %d\n",count);
  	fscanf(fp,"%ld",&arr[i]);
  }
  
-printf("Destination File : selection-sort.txt\n");
+printf("Destination File : bubble-sort.txt\n");
 t = clock(); 
-selectionsort(arr,size); 	
+bubblesort(arr,size); 	
 t = clock() - t; 
 double time_taken = ((double)t)/CLOCKS_PER_SEC; 
 printf("Sorting took %f seconds to execute \n", time_taken); 

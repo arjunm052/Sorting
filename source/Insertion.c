@@ -1,37 +1,34 @@
 #include <stdio.h>
 #include<time.h>
 
-void bubblesort(long int arr[],long int n)
+void insertionsort(long int arr[],long int n)
 {
-	long int i,j,temp,flag=0;
-	for(i=0;i<n-1;i++)
+long int i,key,j;
+for(i=1;i<n;i++)
 	{
-		for(j=0;j<n-i-1;j++)
-		{
-			if(arr[j]>arr[j+1])
-			{
-				flag=1;
-				temp=arr[j+1];
-				arr[j+1]=arr[j];
-				arr[j]=temp;
-			}
-		}
-		if(flag==0)
-		return;
+	key=arr[i];
+	j=i-1;
+	
+	while(j>=0 && arr[j]>key)
+	{
+		arr[j+1]=arr[j];
+		j=j-1;
 	}
+	arr[j+1]=key;
+	}	
 }
 
 int main () 
 {
 	
- clock_t t; 
+clock_t t; 
 
   
  FILE *fp;
  FILE *fp2;
  
  fp = fopen("data.txt","r");
- fp2 = fopen("bubble-sort.txt","w");
+ fp2 = fopen("insertion-sort.txt","w");
  
  long int count = 0;
  char c;
@@ -43,9 +40,7 @@ int main ()
         if (c == '\n') // Increment count if this character is newline 
             count = count + 1;
 
-fclose(fp);
-
-fp = fopen("data.txt","r");		
+rewind(fp);		
 
 printf("Linecount: %d\n",count);
  long int size = count;
@@ -57,9 +52,9 @@ printf("Linecount: %d\n",count);
  	fscanf(fp,"%ld",&arr[i]);
  }
  
-printf("Destination File : bubble-sort.txt\n");
+printf("Destination File : insertion-sort.txt\n");
 t = clock(); 
-bubblesort(arr,size); 	
+insertionsort(arr,size); 	
 t = clock() - t; 
 double time_taken = ((double)t)/CLOCKS_PER_SEC; 
 printf("Sorting took %f seconds to execute \n", time_taken); 

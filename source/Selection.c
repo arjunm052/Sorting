@@ -1,21 +1,30 @@
 #include <stdio.h>
 #include<time.h>
 
-void insertionsort(long int arr[],long int n)
+void swap(long int*,long int*);
+
+
+void selectionsort(long int arr[],long int n)
 {
-long int i,key,j;
-for(i=1;i<n;i++)
+	long int i,j,min;
+	for(i=0;i<n;i++)
 	{
-	key=arr[i];
-	j=i-1;
-	
-	while(j>=0 && arr[j]>key)
-	{
-		arr[j+1]=arr[j];
-		j=j-1;
+		min=i;
+		for(j=i+1;j<n;j++)
+		{
+			if(arr[j]<arr[min])
+			min=j;
+		}
+		swap(&arr[min],&arr[i]);
 	}
-	arr[j+1]=key;
-	}	
+}
+
+void swap(long int *x,long int *y)
+{
+	long 
+	int temp = *x;
+	*x = *y;
+	*y = temp;
 }
 
 int main () 
@@ -28,7 +37,7 @@ clock_t t;
  FILE *fp2;
  
  fp = fopen("data.txt","r");
- fp2 = fopen("insertion-sort.txt","w");
+ fp2 = fopen("selection-sort.txt","w");
  
  long int count = 0;
  char c;
@@ -40,9 +49,7 @@ clock_t t;
         if (c == '\n') // Increment count if this character is newline 
             count = count + 1;
 
-fclose(fp);
-
-fp = fopen("data.txt","r");		
+rewind(fp);		
 
 printf("Linecount: %d\n",count);
  long int size = count;
@@ -54,9 +61,9 @@ printf("Linecount: %d\n",count);
  	fscanf(fp,"%ld",&arr[i]);
  }
  
-printf("Destination File : insertion-sort.txt\n");
+printf("Destination File : selection-sort.txt\n");
 t = clock(); 
-insertionsort(arr,size); 	
+selectionsort(arr,size); 	
 t = clock() - t; 
 double time_taken = ((double)t)/CLOCKS_PER_SEC; 
 printf("Sorting took %f seconds to execute \n", time_taken); 
