@@ -43,9 +43,7 @@ int main ()
         if (c == '\n') // Increment count if this character is newline 
             count = count + 1;
 
-fclose(fp);
-
-fp = fopen("data.txt","r");		
+rewind(fp);		
 
 printf("Linecount: %d\n",count);
  long int size = count;
