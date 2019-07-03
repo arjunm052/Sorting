@@ -18,7 +18,7 @@ for(i=1;i<n;i++)
 	}	
 }
 
-int main () 
+int main (int argc,char *argv[]) 
 {
 	
 clock_t t; 
@@ -27,8 +27,8 @@ clock_t t;
  FILE *fp;
  FILE *fp2;
  
- fp = fopen("data.txt","r");
- fp2 = fopen("insertion-sort.txt","w");
+ fp = fopen(argv[1],"r");
+ fp2 = fopen(argv[2],"w");
  
  long int count = 0;
  char c;
@@ -43,25 +43,25 @@ clock_t t;
 rewind(fp);		
 
 printf("Linecount: %d\n",count);
- long int size = count;
- long int arr[size];
+ 
+ long int arr[count];
  long int i;
  
- for(i=0;i<size;i++)
+ for(i=0;i<count;i++)
  {
  	fscanf(fp,"%ld",&arr[i]);
  }
  
-printf("Destination File : insertion-sort.txt\n");
+printf("Destination File: %s\n",argv[2]);
 t = clock(); 
-insertionsort(arr,size); 	
+insertionsort(arr,count); 	
 t = clock() - t; 
 double time_taken = ((double)t)/CLOCKS_PER_SEC; 
 printf("Sorting took %f seconds to execute \n", time_taken); 
 
  t = clock();
  
- for(i=0;i<size;i++)
+ for(i=0;i<count;i++)
  {
  	fprintf(fp2,"%ld\n",arr[i]);
  }

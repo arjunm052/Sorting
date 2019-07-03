@@ -27,7 +27,7 @@ void swap(long int *x,long int *y)
 	*y = temp;
 }
 
-int main () 
+int main (int argc,char *argv[]) 
 {
 	
 clock_t t; 
@@ -36,8 +36,8 @@ clock_t t;
  FILE *fp;
  FILE *fp2;
  
- fp = fopen("data.txt","r");
- fp2 = fopen("selection-sort.txt","w");
+ fp = fopen(argv[1],"r");
+ fp2 = fopen(argv[2],"w");
  
  long int count = 0;
  char c;
@@ -61,7 +61,7 @@ printf("Linecount: %d\n",count);
  	fscanf(fp,"%ld",&arr[i]);
  }
  
-printf("Destination File : selection-sort.txt\n");
+printf("Destination File : %s\n",argv[2]);
 t = clock(); 
 selectionsort(arr,size); 	
 t = clock() - t; 
